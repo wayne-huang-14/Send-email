@@ -1,12 +1,11 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
 import { Typography } from '@material-ui/core';
+
+import Form from '../components/form';
 
 export default () => (
   <>
     <Typography variant="h1">Send a Message</Typography>
-    <Button variant="contained" color="primary">
-      Material UI
-    </Button>
+    <Form />
   </>
 );
