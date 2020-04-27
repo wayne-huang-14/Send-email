@@ -74,9 +74,19 @@ const Form = () => {
     setStatus(FORM_STATE.PENDING);
     console.log(state);
 
-    setTimeout(() => {
-      setStatus(FORM_STATE.SUCCESS);
-    }, 2000);
+    fetch('/api/contact', {
+      method: 'POST',
+      body: JSON.stringify(state)
+    })
+      .then(response => response.json())
+      .then(response => {
+        console.log(response);
+        setStatus(FORM_STATE.SUCCESS);
+      })
+      .catch(error => {
+        console.log(error);
+        setStatus(FORM_STATE.ERROR);
+      });
   };
 
   if (state.status === FORM_STATE.SUCCESS) {
