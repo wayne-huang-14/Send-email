@@ -7,21 +7,38 @@ import {
   CircularProgress
 } from '@material-ui/core';
 
+const TYPE = {
+  INPUT_CHANGE: 'INPUT_CHANGE',
+  STATUS_CHANGE: 'STATUS_CHANGE',
+  RESET_CHANGE: 'RESET_CHANGE'
+};
+
+const FORM_STATE = {
+  IDLE: 'IDLE',
+  ERROR: 'ERROR',
+  PENDING: 'PENDING',
+  SUCCESS: 'SUCCESS'
+};
+
 const initialState = {
   name: '',
   email: '',
   subject: '',
   body: '',
-  status: 'ERROR'
+  status: FORM_STATE.IDLE
 };
 
 const reducer = (state, action) => {
-  if (action.type === 'inputChange') {
+  if (action.type === TYPE.INPUT_CHANGE) {
     return { ...state, [action.payload.name]: action.payload.value };
   }
 
-  if (action.type === 'statusChange') {
+  if (action.type === TYPE.STATUS_CHANGE) {
     return { ...state, status: action.payload.status };
+  }
+
+  if (action.type === TYPE.RESET_CHANGE) {
+    return initialState;
   }
 
   return state;
@@ -35,7 +52,7 @@ const Form = () => {
     const name = event.target.name;
 
     dispatch({
-      type: 'inputChange',
+      type: TYPE.INPUT_CHANGE,
       payload: {
         name,
         value
@@ -43,13 +60,34 @@ const Form = () => {
     });
   };
 
-  const onFormSubmit = event => {
-    event.preventDefault();
-    console.log(state);
+  const setStatus = status => {
+    dispatch({
+      type: TYPE.STATUS_CHANGE,
+      payload: {
+        status
+      }
+    });
   };
 
-  if (state.status === 'SUCCESS') {
-    return <Typography>Message Sent!</Typography>;
+  const onFormSubmit = event => {
+    event.preventDefault();
+    setStatus(FORM_STATE.PENDING);
+    console.log(state);
+
+    setTimeout(() => {
+      setStatus(FORM_STATE.SUCCESS);
+    }, 2000);
+  };
+
+  if (state.status === FORM_STATE.SUCCESS) {
+    return (
+      <>
+        <Typography>Message Sent!</Typography>
+        <Button onClick={() => dispatch({ type: TYPE.RESET_CHANGE })}>
+          Reset!
+        </Button>
+      </>
+    );
   }
 
   return (
