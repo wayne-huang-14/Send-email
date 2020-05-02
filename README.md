@@ -1,7 +1,7 @@
 # Send Email
 
 Allows a user to send an email to an address of choice.
-Demo
+[Live DEMO](https://send-mail-serverless.netlify.app/)
 
 ## Libraries/Tech Used
 
@@ -9,6 +9,7 @@ Demo
 2. Gatsby
 3. Mailgun
 4. Material-UI
+5. Netlify Serverless Function
 
 ## Description
 
