@@ -93,7 +93,10 @@ const Form = () => {
     return (
       <>
         <Typography>Message Sent!</Typography>
-        <Button onClick={() => dispatch({ type: TYPE.RESET_CHANGE })}>
+        <Button
+          variant="outlined"
+          onClick={() => dispatch({ type: TYPE.RESET_CHANGE })}
+        >
           Reset!
         </Button>
       </>
