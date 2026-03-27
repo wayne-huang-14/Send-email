@@ -20,6 +20,8 @@ const FORM_STATE = {
   SUCCESS: 'SUCCESS'
 };
 
+console.log('another');
+
 const initialState = {
   name: '',
   email: '',
