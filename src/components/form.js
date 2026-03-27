@@ -19,7 +19,6 @@ const FORM_STATE = {
   PENDING: 'PENDING',
   SUCCESS: 'SUCCESS'
 };
-console.log('test');
 
 const initialState = {
   name: '',
